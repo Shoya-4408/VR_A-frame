@@ -6,11 +6,29 @@
   </head>
   <body>
     <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky color="#ECECEC"></a-sky>
+      <!-- 全体を照らす弱い光 -->
+      <a-light type="ambient" color="#6680AA" intensity="0.3"></a-light>
+      <!-- 月明かりをイメージした光 -->
+        <a-light type="directional" color="#AABBDD" intensity="0.5" position="-5 10 3"></a-light>
+      <!-- 木を生成する場所 -->
+      <a-entity id="forest"></a-entity>
+      <!-- 雑草を生成する場所 -->
+      <a-entity id="grasses"></a-entity>
+      <!-- 花を生成する場所 -->
+      <a-entity id="flowers"></a-entity>
+      <!-- 惑星を配置する場所 -->
+      <a-entity id="planets"></a-entity>
+      <!-- 石 -->
+      <a-sphere position="2 0.4 -6" radius="0.7" scale="1.4 0.7 1" color="#858585"></a-sphere>
+      <!-- 池 -->
+      <a-circle position="0 0.03 -10" rotation="-90 0 0" radius="4" color="#55BCEB"></a-circle>
+      <!-- 地面 -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="#78B66A"></a-plane>
+      <!-- 空 -->
+      <a-sky src="images/NightSkyHDRI015_2K_TONEMAPPED.jpg"></a-sky>
     </a-scene>
+
+    <script src="script.js"></script>
+
   </body>
 </html>
