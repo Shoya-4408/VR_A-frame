@@ -210,7 +210,7 @@ const flowers = document.querySelector("#flowers");
     // ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
 
-    // 惑星を生成
+    // 惑星を生成ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     const planets = document.querySelector("#planets");
 
 
@@ -459,3 +459,62 @@ const flowers = document.querySelector("#flowers");
         "easing: linear; " +
         "loop: true"
     );
+    // ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+
+    // 星礫を生成する場所を取得ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    const starGravel = document.querySelector("#starGravel");
+
+    // 星礫を落下させる関数
+    function fallStar(star) {
+    // 現在の位置を取得
+    const position = star.getAttribute("position");
+    // 落下先の位置
+    const endY = position.y - 40;
+    // アニメーションを設定
+    star.setAttribute("animation",
+        "property: position; " +
+        `to: ${position.x} ${endY} ${position.z}; ` +
+        `dur: ${Math.random() * 5000 + 10000}; ` +
+        "easing: linear"
+    );
+    }
+
+    for (let i = 0; i < 200; i++) {
+    const star = document.createElement("a-sphere");
+
+    // ランダムな初期位置（最初の一回）ーーーーーーーーーーーーーーーーーーーーーーーーー
+    const x = Math.random() * 100 - 50;
+    const y = Math.random() * 20 + 30;
+    const z = Math.random() * 100 - 50;
+
+    star.setAttribute("position", `${x} ${y} ${z}`);
+    star.setAttribute("radius", "0.1");
+
+    star.setAttribute("material",
+    "shader: standard;" +
+    "color: #FFFFFF;" +
+    "emissive: #FFFFFF;" +
+    "emissiveIntensity: 10"
+    );
+
+    // 星礫を配置
+    starGravel.appendChild(star);
+    // ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+    // 落下終了後の処理を登録（アニメーション終了のたびに実行）ーーーーーーーーーーーーー
+    star.addEventListener("animationcomplete", () => {
+
+        const newX = Math.random() * 100 - 50;
+        const newY = Math.random() * 20 + 30;
+        const newZ = Math.random() * 100 - 50;
+
+        star.setAttribute("position", `${newX} ${newY} ${newZ}`);
+
+        fallStar(star);
+    });
+
+    // 最初の落下を開始
+    fallStar(star);
+    }
+    // ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
